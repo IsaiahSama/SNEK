@@ -56,6 +56,20 @@ class GameView(View):
             self.fruit = load_sprite(FRUIT, randrange(SCREEN_WIDTH), randrange(SCREEN_HEIGHT))
             self.player.add_body()
 
+        self.stay_in_bounds()
+
+    def stay_in_bounds(self):
+        """Method used to ensure the player stays in bounds."""
+        if self.player.head.center_x < 0:
+            self.player.head.center_x = SCREEN_WIDTH - (SIZE // 2)
+        if self.player.head.center_x > SCREEN_WIDTH:
+            self.player.head.center_x = SIZE // 2
+        if self.player.head.center_y < 0:
+            self.player.head.center_y = SCREEN_HEIGHT - (SIZE // 2)
+        if self.player.head.center_y > SCREEN_HEIGHT:
+            self.player.head.center_y = SIZE // 2
+
+
     def on_key_press(self, key: int, modifiers: int):
         if key in (arcade.key.W, arcade.key.UP):
             self.current_direction = "UP" 
