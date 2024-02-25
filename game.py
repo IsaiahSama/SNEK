@@ -23,7 +23,7 @@ class MenuView(View):
 class GameView(View):
     def __init__(self):
         super().__init__()
-
+        self.window.set_update_rate(1/2)
         self.setup()
 
     def setup(self):
@@ -46,7 +46,7 @@ class GameView(View):
         self.fruits.draw()
 
     def on_update(self, dt:float):
-        self.player.update()
+        self.player.update(dt)
         self.fruits.update()
 
 if __name__ == "__main__":
