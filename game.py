@@ -75,7 +75,7 @@ class GameView(View):
 
     def game_over(self):
         """This method is used to run the game over sequence."""
-        if self.main_sound.is_playing(self.main_player):
+        if self.main_player and self.main_sound.is_playing(self.main_player):
             self.main_sound.stop(self.main_player)
 
         self.lose_sound.play()
