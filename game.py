@@ -45,7 +45,7 @@ class GameView(View):
         self.player.draw()
         self.fruits.draw()
 
-    def on_update(self):
+    def on_update(self, dt:float):
         self.player.update()
         self.fruits.update()
 
