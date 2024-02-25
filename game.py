@@ -13,7 +13,7 @@ class MenuView(View):
         arcade.draw_text("SNEK!!", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, font_size=60, anchor_x='center')
         arcade.draw_text("Click to begin!", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.3, font_size=20, anchor_x='center')
 
-    def on_mouse_press(self):
+    def on_mouse_press(self, *args):
         print("I've been clicked!")
 
 class GameView(View):
@@ -23,7 +23,7 @@ class GameView(View):
         self.player_list = arcade.SpriteList()
         self.fruit_list = arcade.SpriteList()
 
-        
+
 
 
 
