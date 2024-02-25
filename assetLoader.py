@@ -1,5 +1,6 @@
 """This Class is responsible for loading assets."""
 from arcade import Sprite, Sound, Texture, load_texture
+from constants import SPRITE_PATH
 
 def load_sprite(sprite_name: str, center_x: float=0, center_y: float=0) -> Sprite:
     """Function used to create a sprite at the given x and y co-ordinates
@@ -12,7 +13,18 @@ def load_sprite(sprite_name: str, center_x: float=0, center_y: float=0) -> Sprit
     Returns:
         Sprite"""
     
-    return Sprite("./Assets/Sprites/" + sprite_name, center_x=center_x, center_y=center_y)
+    return Sprite("./Assets/Sprites/" + sprite_name + ".png", center_x=center_x, center_y=center_y)
+
+def get_idle_texture(sprite_name:str) -> Texture:
+    """Function used to get the Idle texture for a sprite.
+     
+    Args:
+        sprite_name (str): The name of the sprite to get the idle texture for
+        
+    Returns:
+        Texture"""
+    
+    return load_texture(f"{SPRITE_PATH}{sprite_name}.png")
 
 def get_sprite_textures(texture_path: str) -> list:
     """Function used to load the animated textures.

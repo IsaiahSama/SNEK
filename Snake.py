@@ -1,6 +1,6 @@
 from arcade import Sprite, SpriteList
 from assetLoader import load_sprite # Deprecated
-from assetLoader import get_sprite_textures
+from assetLoader import get_sprite_textures, get_idle_texture
 from constants import *
 
 # Tuple: change_x, change_y, angle
@@ -16,9 +16,24 @@ class SnakePart(Sprite):
 
     def __init__(self, filename: str, center_x: float=0, center_y:float=0, start_frame:int=0):
         super().__init__(f"{SPRITE_PATH}{filename}.png", center_x=center_x, center_y=center_y)
+        self.start_frame = start_frame
         self.cur_texture = start_frame
         self.textures = get_sprite_textures(filename+"_dance")
+        self.idle_texture = get_idle_texture(filename)
 
+    def update_animation(self, delta_time: float = 1 / 60, fellas:bool=False):
+        """Method used to update the animation of the sprites. The whole reason why I decided to use a custom Sprite class. Eugh"""
+        if not fellas:
+            self.texture = self.idle_texture
+            return
+
+        self.cur_texture += 1
+        if self.cur_texture > (len(self.textures) - 1) * SNEK_UPDATES_PER_FRAME:
+            self.cur_texture = 0
+
+        frame = self.cur_texture // SNEK_UPDATES_PER_FRAME
+        self.texture = self.textures[frame]
+        
 class Snake:
     def __init__(self):
         self.body = SpriteList()
