@@ -97,13 +97,17 @@ class GameView(View):
 
     def on_key_press(self, key: int, modifiers: int):
         if key in (arcade.key.W, arcade.key.UP):
-            self.current_direction = "UP" 
+            if self.current_direction != "DOWN":
+                self.current_direction = "UP" 
         elif key in (arcade.key.A, arcade.key.LEFT):
-            self.current_direction = "LEFT" 
+            if self.current_direction != "RIGHT":
+                self.current_direction = "LEFT" 
         elif key in (arcade.key.S, arcade.key.DOWN):
-            self.current_direction = "DOWN" 
+            if self.current_direction != "UP":
+                self.current_direction = "DOWN" 
         elif key in (arcade.key.D, arcade.key.RIGHT):
-            self.current_direction = "RIGHT" 
+            if self.current_direction != "LEFT":
+                self.current_direction = "RIGHT" 
         elif key == arcade.key.M:
             if self.main_player and self.main_sound.is_playing(self.main_player):
                 self.main_sound.stop(self.main_player)
