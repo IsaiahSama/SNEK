@@ -13,8 +13,8 @@ DIRECTIONS = {
 class SnakePart(Sprite):
     """Class used to represent a part of the snake <--->"""
 
-    def __init__(self, filename: str, center_x: float, center_y:float):
-        super().__init__(f"{SPRITE_PATH}{filename}", center_x=center_x, center_y=center_y)
+    def __init__(self, filename: str, center_x: float=0, center_y:float=0):
+        super().__init__(f"{SPRITE_PATH}{filename}.png", center_x=center_x, center_y=center_y)
 
 
 class Snake:

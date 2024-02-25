@@ -11,9 +11,9 @@ TITLE = "SNEK: Scale Navigate Eat Keep"
 # Sprite
 SPRITE_PATH = "./Assets/Sprites/"
 FRUIT = "Apple.png"
-PLAYER_HEAD = "player_head.png"
-PLAYER_BODY = "player_body.png"
-PLAYER_TAIL = "player_tail.png"
+PLAYER_HEAD = "player_head"
+PLAYER_BODY = "player_body"
+PLAYER_TAIL = "player_tail"
 
 HEAD_DANCE = "player_head_dance"
 BODY_DANCE = "player_body_dance"
