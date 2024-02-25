@@ -15,7 +15,8 @@ class MenuView(View):
         self.clear()
 
         arcade.draw_text("SNEK!!", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, font_size=60, anchor_x='center')
-        arcade.draw_text("Click to begin!", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.3, font_size=20, anchor_x='center')
+        arcade.draw_text("Click to begin!", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.4, font_size=20, anchor_x='center')
+        arcade.draw_text("Press M to toggle your fellas.", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.2, font_size=14, anchor_x='center')
 
     def on_mouse_press(self, *args):
         game_view = GameView()
@@ -26,6 +27,7 @@ class GameView(View):
         super().__init__()
         self.window.set_update_rate(1/2)
         self.main_sound = load_sound(MAIN_GAME)
+        self.main_player = None
         self.setup()
 
     def setup(self):
@@ -35,7 +37,6 @@ class GameView(View):
         self.fruit = load_sprite(FRUIT, randrange(TILE_X) * SIZE + (SIZE // 2), randrange(TILE_Y) * SIZE + (SIZE // 2))
 
         self.current_direction = self.player.direction
-        self.main_sound.play(loop=True)
 
     def on_show_view(self):
         arcade.set_background_color(arcade.color.BLACK)
@@ -66,9 +67,9 @@ class GameView(View):
 
     def game_over(self):
         """This method is used to run the game over sequence."""
-        if self.main_sound.is_playing():
-            self.main_sound.stop()
-            
+        if self.main_sound.is_playing(self.main_player):
+            self.main_sound.stop(self.main_player)
+
         game_over = GameOverView()
         game_over.setup(self.player.snek_size)
         self.window.show_view(game_over)
@@ -94,6 +95,11 @@ class GameView(View):
             self.current_direction = "DOWN" 
         elif key in (arcade.key.D, arcade.key.RIGHT):
             self.current_direction = "RIGHT" 
+        elif key == arcade.key.M:
+            if self.main_player and self.main_sound.is_playing(self.main_player):
+                self.main_sound.stop(self.main_player)
+            else:
+                self.main_player = self.main_sound.play()
 
 class GameOverView(View):
     def setup(self, score: int):
