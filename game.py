@@ -99,9 +99,11 @@ class GameOverView(View):
     def on_show_view(self):
         arcade.set_background_color(arcade.color.RED_BROWN)
 
-    def draw(self):
-        arcade.draw_text("You have fallen.", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.7, font_size=30, anchor_x='center')
-        arcade.draw_text(f"Your size: {self.score}", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.3, anchor_x='center')
+    def on_draw(self):
+        self.clear()
+
+        arcade.draw_text("You have fallen.", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.7, font_size=40, anchor_x='center')
+        arcade.draw_text(f"Your size: {self.score}", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.3, font_size=20, anchor_x='center')
         arcade.draw_text("Click to play again!", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.5, anchor_x='center')
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
