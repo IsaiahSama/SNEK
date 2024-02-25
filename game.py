@@ -2,6 +2,9 @@
 import arcade
 from arcade import View
 from constants import *
+from Snake import Snake
+from spriteLoader import load_sprite
+from random import randrange
 
 class MenuView(View):
     def on_show_view(self):
@@ -20,12 +23,30 @@ class GameView(View):
     def __init__(self):
         super().__init__()
 
-        self.player_list = arcade.SpriteList()
-        self.fruit_list = arcade.SpriteList()
+        self.setup()
 
+    def setup(self):
+        """This method is used to set up the game with everything we will need to start."""
 
+        self.player = load_sprite(PLAYER_HEAD, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.fruits = arcade.SpriteList()
 
+        fruit = load_sprite(FRUIT, randrange(SCREEN_WIDTH), randrange(SCREEN_HEIGHT))
 
+        self.fruits.append(fruit)
+
+    def on_show_view(self):
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+        self.clear()
+
+        self.player.draw()
+        self.fruits.draw()
+
+    def on_update(self):
+        self.player.update()
+        self.fruits.update()
 
 if __name__ == "__main__":
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
