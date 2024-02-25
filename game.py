@@ -58,6 +58,12 @@ class GameView(View):
 
         self.stay_in_bounds()
 
+    def game_over(self):
+        """This method is used to run the game over sequence."""
+
+        game_over = GameOverView(self.player.snek_size)
+        self.window.show_view(game_over)
+
     def stay_in_bounds(self):
         """Method used to ensure the player stays in bounds."""
         if self.player.head.center_x < 0:
@@ -79,6 +85,23 @@ class GameView(View):
             self.current_direction = "DOWN" 
         elif key in (arcade.key.D, arcade.key.RIGHT):
             self.current_direction = "RIGHT" 
+
+class GameOverView(View):
+    def __init__(self, score:int):
+        super().__init__()
+        self.score = score
+
+    def on_show_view(self):
+        arcade.set_background_color(arcade.color.RED_BROWN)
+
+    def draw(self):
+        arcade.draw_text("You have fallen.", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.7, font_size=30, anchor_x='center')
+        arcade.draw_text(f"Your size: {self.score}", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.3, anchor_x='center')
+        arcade.draw_text("Click to play again!", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.5, anchor_x='center')
+
+    def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
+        game_view = GameView()
+        self.window.show_view(game_view)
 
 if __name__ == "__main__":
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
