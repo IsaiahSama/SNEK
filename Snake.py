@@ -9,9 +9,16 @@ DIRECTIONS = {
     "LEFT": (-32, 0, 90),
     "RIGHT": (32, 0, 270)
 }
+
+class SnakeBody(Sprite):
+    """Class used to represent the body of the snake D:"""
+    def __init__(self, center_x, center_y):
+        super().__init__(f"./Assets/Sprites/{PLAYER_BODY}", center_x=center_x, center_y=center_y)
+
 class Snake:
     def __init__(self):
         self.body = SpriteList()
+        self.fellas = False
         self.setup()
 
     def setup(self):
@@ -26,6 +33,11 @@ class Snake:
         self.direction = "UP"
 
         self.last_pos = tuple()
+
+    def all_my_fellas(self):
+        """Method used to toggle all my fellas!!!"""
+        if not self.fellas:
+            pass
 
     def draw(self):
         """Method responsible for the drawing of the snake body."""
@@ -67,6 +79,12 @@ class Snake:
         self.move_head(dir)
         self.body.update()
         self.move_body()
+        self.update_animation()
+
+    def update_animation(self):
+        """Method used to update the animation if fellas is active."""
+
+        if not self.fellas: return
 
     def set_new_part_position(self, sprite:Sprite):
         """Method used to position a body part using the last item of the body SpriteList

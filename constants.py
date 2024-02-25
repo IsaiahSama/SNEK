@@ -14,8 +14,15 @@ PLAYER_HEAD = "player_head.png"
 PLAYER_BODY = "player_body.png"
 PLAYER_TAIL = "player_tail.png"
 
+HEAD_DANCE = "player_head_dance"
+BODY_DANCE = "player_body_dance"
+TAIL_DANCE = "player_tail_dance"
+
 # Sounds
 MAIN_GAME = "AllMyFellas.mp3"
 CLICK = "coin1.wav"
 NOM = "hit3.wav"
 LOSE = "lose3.wav"
+
+# Animation
+SNEK_UPDATES_PER_FRAME = 5
