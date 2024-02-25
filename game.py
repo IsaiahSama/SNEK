@@ -31,7 +31,7 @@ class GameView(View):
         """This method is used to set up the game with everything we will need to start."""
 
         self.player = Snake()
-        self.fruit = load_sprite(FRUIT, randrange(SCREEN_WIDTH), randrange(SCREEN_HEIGHT))
+        self.fruit = load_sprite(FRUIT, randrange(TILE_X) * SIZE, randrange(TILE_Y) * SIZE)
 
         self.current_direction = self.player.direction
 
