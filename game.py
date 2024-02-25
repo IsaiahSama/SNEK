@@ -35,7 +35,7 @@ class GameView(View):
         self.fruit = load_sprite(FRUIT, randrange(TILE_X) * SIZE + (SIZE // 2), randrange(TILE_Y) * SIZE + (SIZE // 2))
 
         self.current_direction = self.player.direction
-        self.main_sound.play()
+        self.main_sound.play(loop=True)
 
     def on_show_view(self):
         arcade.set_background_color(arcade.color.BLACK)
@@ -66,7 +66,9 @@ class GameView(View):
 
     def game_over(self):
         """This method is used to run the game over sequence."""
-        self.main_sound.stop()
+        if self.main_sound.is_playing():
+            self.main_sound.stop()
+            
         game_over = GameOverView()
         game_over.setup(self.player.snek_size)
         self.window.show_view(game_over)
