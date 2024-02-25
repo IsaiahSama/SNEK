@@ -29,7 +29,7 @@ class GameView(View):
     def setup(self):
         """This method is used to set up the game with everything we will need to start."""
 
-        self.player = load_sprite(PLAYER_HEAD, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.player = Snake()
         self.fruits = arcade.SpriteList()
 
         fruit = load_sprite(FRUIT, randrange(SCREEN_WIDTH), randrange(SCREEN_HEIGHT))
