@@ -108,9 +108,11 @@ class GameView(View):
             if self.main_player and self.main_sound.is_playing(self.main_player):
                 self.main_sound.stop(self.main_player)
                 self.player.all_my_fellas(False)
+                self.window.set_update_rate(1/2)
             else:
                 self.main_player = self.main_sound.play(loop=True)
                 self.player.all_my_fellas(True)
+                self.window.set_update_rate(1/15)
 
 class GameOverView(View):
     def setup(self, score: int):
