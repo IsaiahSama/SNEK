@@ -53,10 +53,14 @@ class Snake:
 
         self.last_pos = tuple()
 
-    def all_my_fellas(self):
-        """Method used to toggle all my fellas!!!"""
-        if not self.fellas:
-            pass
+    def all_my_fellas(self, value:bool):
+        """Method used to set the state of all my fellas!!!
+        
+        Args:
+            value (bool): A boolean value.
+        """
+
+        self.fellas = value
 
     def draw(self):
         """Method responsible for the drawing of the snake body."""
@@ -98,12 +102,9 @@ class Snake:
         self.move_head(dir)
         self.body.update()
         self.move_body()
-        self.update_animation()
-
-    def update_animation(self):
-        """Method used to update the animation if fellas is active."""
-
-        if not self.fellas: return
+        
+        for part in self.body:
+            part.update_animation(dt, self.fellas)
 
     def set_new_part_position(self, sprite:Sprite):
         """Method used to position a body part using the last item of the body SpriteList

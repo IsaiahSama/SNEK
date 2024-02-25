@@ -26,4 +26,4 @@ NOM = "hit3.wav"
 LOSE = "lose3.wav"
 
 # Animation
-SNEK_UPDATES_PER_FRAME = 5
+SNEK_UPDATES_PER_FRAME = 3
