@@ -1,6 +1,7 @@
 """This will be the entry point of the game"""
 import arcade
 from arcade import View
+import arcade.key
 from constants import *
 from Snake import Snake
 from spriteLoader import load_sprite
@@ -36,6 +37,8 @@ class GameView(View):
 
         self.fruits.append(fruit)
 
+        self.current_direction = self.player.direction
+
     def on_show_view(self):
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -46,8 +49,18 @@ class GameView(View):
         self.fruits.draw()
 
     def on_update(self, dt:float):
-        self.player.update(dt)
+        self.player.update(dt, self.current_direction)
         self.fruits.update()
+
+    def on_key_press(self, key: int, modifiers: int):
+        if key in (arcade.key.W, arcade.key.UP):
+            self.current_direction = "UP" 
+        elif key in (arcade.key.A, arcade.key.LEFT):
+            self.current_direction = "LEFT" 
+        elif key in (arcade.key.S, arcade.key.DOWN):
+            self.current_direction = "DOWN" 
+        elif key in (arcade.key.D, arcade.key.RIGHT):
+            self.current_direction = "RIGHT" 
 
 if __name__ == "__main__":
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
