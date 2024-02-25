@@ -23,6 +23,8 @@ class GameView(View):
         self.player_list = arcade.SpriteList()
         self.fruit_list = arcade.SpriteList()
 
+        
+
 
 
 if __name__ == "__main__":
