@@ -4,7 +4,7 @@ from arcade import View
 import arcade.key
 from constants import *
 from Snake import Snake
-from spriteLoader import load_sprite
+from assetLoader import load_sprite, load_sound
 from random import randrange
 
 class MenuView(View):
@@ -25,6 +25,7 @@ class GameView(View):
     def __init__(self):
         super().__init__()
         self.window.set_update_rate(1/2)
+        self.main_sound = load_sound(MAIN_GAME)
         self.setup()
 
     def setup(self):
@@ -34,6 +35,7 @@ class GameView(View):
         self.fruit = load_sprite(FRUIT, randrange(TILE_X) * SIZE + (SIZE // 2), randrange(TILE_Y) * SIZE + (SIZE // 2))
 
         self.current_direction = self.player.direction
+        self.main_sound.play()
 
     def on_show_view(self):
         arcade.set_background_color(arcade.color.BLACK)
@@ -64,7 +66,7 @@ class GameView(View):
 
     def game_over(self):
         """This method is used to run the game over sequence."""
-
+        self.main_sound.stop()
         game_over = GameOverView()
         game_over.setup(self.player.snek_size)
         self.window.show_view(game_over)

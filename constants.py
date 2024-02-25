@@ -13,3 +13,6 @@ FRUIT = "Apple.png"
 PLAYER_HEAD = "player_head.png"
 PLAYER_BODY = "player_body.png"
 PLAYER_TAIL = "player_tail.png"
+
+# Sounds
+MAIN_GAME = "AllMyFellas.mp3"

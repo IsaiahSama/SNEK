@@ -1,5 +1,5 @@
 from arcade import Sprite, SpriteList
-from spriteLoader import load_sprite
+from assetLoader import load_sprite
 from constants import *
 
 # Tuple: change_x, change_y, angle
