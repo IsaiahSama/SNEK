@@ -16,7 +16,7 @@ class Snake:
 
     def setup(self):
         """Responsible for setting up the Snake class."""
-
+        self.snek_size = 2
         self.head = load_sprite(PLAYER_HEAD, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 32)
 
         self.tail = load_sprite(PLAYER_TAIL, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
@@ -96,3 +96,4 @@ class Snake:
 
         self.set_new_part_position(self.tail)
         self.body.append(self.tail)
+        self.snek_size += 1

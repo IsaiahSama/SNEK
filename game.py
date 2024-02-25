@@ -29,7 +29,7 @@ class GameView(View):
 
     def setup(self):
         """This method is used to set up the game with everything we will need to start."""
-
+        self.score = 0
         self.player = Snake()
         self.fruit = load_sprite(FRUIT, randrange(TILE_X) * SIZE, randrange(TILE_Y) * SIZE)
 
@@ -43,6 +43,8 @@ class GameView(View):
 
         self.player.draw()
         self.fruit.draw()
+
+        arcade.draw_text(f"Size: {self.player.snek_size}", 10, SCREEN_HEIGHT - 20 )
 
     def on_update(self, dt:float):
         self.player.update(dt, self.current_direction)
