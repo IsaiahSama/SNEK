@@ -1,5 +1,5 @@
 from arcade import Sprite, SpriteList
-from assetLoader import load_sprite
+from assetLoader import load_sprite # Deprecated
 from constants import *
 
 # Tuple: change_x, change_y, angle
@@ -10,10 +10,12 @@ DIRECTIONS = {
     "RIGHT": (32, 0, 270)
 }
 
-class SnakeBody(Sprite):
-    """Class used to represent the body of the snake D:"""
-    def __init__(self, center_x, center_y):
-        super().__init__(f"./Assets/Sprites/{PLAYER_BODY}", center_x=center_x, center_y=center_y)
+class SnakePart(Sprite):
+    """Class used to represent a part of the snake <--->"""
+
+    def __init__(self, filename: str, center_x: float, center_y:float):
+        super().__init__(f"{SPRITE_PATH}{filename}", center_x=center_x, center_y=center_y)
+
 
 class Snake:
     def __init__(self):
@@ -24,9 +26,9 @@ class Snake:
     def setup(self):
         """Responsible for setting up the Snake class."""
         self.snek_size = 2
-        self.head = load_sprite(PLAYER_HEAD, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 32)
+        self.head = SnakePart(PLAYER_HEAD, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 32)
 
-        self.tail = load_sprite(PLAYER_TAIL, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.tail = SnakePart(PLAYER_TAIL, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
         self.body.extend([self.head, self.tail])
 
@@ -104,11 +106,11 @@ class Snake:
     def add_body(self):
         """Method used to add a body part to the Snek"""
 
-        new_body_part = load_sprite(PLAYER_BODY)
+        new_body_part = SnakePart(PLAYER_BODY)
         self.set_new_part_position(new_body_part)
         
         self.tail.kill()
-        self.tail = load_sprite(PLAYER_TAIL)
+        self.tail = SnakePart(PLAYER_TAIL)
 
         self.body.append(new_body_part)
 

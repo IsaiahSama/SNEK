@@ -9,6 +9,7 @@ SCREEN_HEIGHT = SIZE * TILE_Y
 TITLE = "SNEK: Scale Navigate Eat Keep"
 
 # Sprite
+SPRITE_PATH = "./Assets/Sprites/"
 FRUIT = "Apple.png"
 PLAYER_HEAD = "player_head.png"
 PLAYER_BODY = "player_body.png"
