@@ -16,6 +16,13 @@ class MenuView(View):
     def on_mouse_press(self):
         print("I've been clicked!")
 
+class GameView(View):
+    def __init__(self):
+        super().__init__()
+
+        self.player_list = arcade.SpriteList()
+        self.fruit_list = arcade.SpriteList()
+
 
 
 if __name__ == "__main__":
