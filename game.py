@@ -17,7 +17,8 @@ class MenuView(View):
         arcade.draw_text("Click to begin!", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 0.3, font_size=20, anchor_x='center')
 
     def on_mouse_press(self, *args):
-        print("I've been clicked!")
+        game_view = GameView()
+        self.window.show_view(game_view)
 
 class GameView(View):
     def __init__(self):
