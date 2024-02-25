@@ -50,7 +50,7 @@ class GameView(View):
         self.player.update(dt, self.current_direction)
         self.fruit.update()
 
-        hit_list = arcade.check_for_collision(self.player.body[0], self.fruit)
+        hit_list = arcade.check_for_collision(self.player.head, self.fruit)
         if hit_list:
             self.fruit.kill()
             self.fruit = load_sprite(FRUIT, randrange(SCREEN_WIDTH), randrange(SCREEN_HEIGHT))
@@ -58,10 +58,15 @@ class GameView(View):
 
         self.stay_in_bounds()
 
+        hit_list = arcade.check_for_collision_with_list(self.player.head, self.player.body)
+        if hit_list:
+            self.game_over()
+
     def game_over(self):
         """This method is used to run the game over sequence."""
 
-        game_over = GameOverView(self.player.snek_size)
+        game_over = GameOverView()
+        game_over.setup(self.player.snek_size)
         self.window.show_view(game_over)
 
     def stay_in_bounds(self):
@@ -87,8 +92,8 @@ class GameView(View):
             self.current_direction = "RIGHT" 
 
 class GameOverView(View):
-    def __init__(self, score:int):
-        super().__init__()
+    def setup(self, score: int):
+        """Method used to setup the game over view"""
         self.score = score
 
     def on_show_view(self):
