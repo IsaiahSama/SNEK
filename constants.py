@@ -16,3 +16,6 @@ PLAYER_TAIL = "player_tail.png"
 
 # Sounds
 MAIN_GAME = "AllMyFellas.mp3"
+CLICK = "coin1.wav"
+NOM = "hit3.wav"
+LOSE = "lose3.wav"

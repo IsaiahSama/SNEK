@@ -18,6 +18,20 @@ def load_sound(sound_name:str) -> Sound:
     """Function used to load a sound!
     
     Args:
-        sound_name (str): The name of the sound to load."""
+        sound_name (str): The name of the sound to load.
+        
+    Returns:
+        Sound"""
     
     return Sound("./Assets/Sounds/" + sound_name)
+
+def load_resource_sound(sound_name:str) -> Sound:
+    """Function used to load a sound provided as a built in resource.
+    
+    Args:
+        sound_name (str): The name of the sound to load.
+        
+    Returns: 
+        Sound"""
+    
+    return Sound(":resources:sounds/" + sound_name)
