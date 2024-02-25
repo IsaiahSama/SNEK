@@ -31,11 +31,7 @@ class GameView(View):
         """This method is used to set up the game with everything we will need to start."""
 
         self.player = Snake()
-        self.fruits = arcade.SpriteList()
-
-        fruit = load_sprite(FRUIT, randrange(SCREEN_WIDTH), randrange(SCREEN_HEIGHT))
-
-        self.fruits.append(fruit)
+        self.fruit = load_sprite(FRUIT, randrange(SCREEN_WIDTH), randrange(SCREEN_HEIGHT))
 
         self.current_direction = self.player.direction
 
@@ -46,11 +42,17 @@ class GameView(View):
         self.clear()
 
         self.player.draw()
-        self.fruits.draw()
+        self.fruit.draw()
 
     def on_update(self, dt:float):
         self.player.update(dt, self.current_direction)
-        self.fruits.update()
+        self.fruit.update()
+
+        hit_list = arcade.check_for_collision(self.player.body[0], self.fruit)
+        if hit_list:
+            self.fruit.kill()
+            self.fruit = load_sprite(FRUIT, randrange(SCREEN_WIDTH), randrange(SCREEN_HEIGHT))
+            self.player.add_body()
 
     def on_key_press(self, key: int, modifiers: int):
         if key in (arcade.key.W, arcade.key.UP):

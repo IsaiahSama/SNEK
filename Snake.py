@@ -18,13 +18,10 @@ class Snake:
         """Responsible for setting up the Snake class."""
 
         self.head = load_sprite(PLAYER_HEAD, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 32)
-        self.mid1 = load_sprite(PLAYER_BODY, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-        self.mid2 = load_sprite(PLAYER_BODY, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 32)
-        self.tail = load_sprite(PLAYER_TAIL, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 64)
-        # self.tail = load_sprite(PLAYER_TAIL, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
-        self.body.extend([self.head, self.mid1, self.mid2, self.tail])
-        # self.body.extend([self.head, self.tail])
+        self.tail = load_sprite(PLAYER_TAIL, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+        self.body.extend([self.head, self.tail])
 
         self.direction = "UP"
 
@@ -71,3 +68,31 @@ class Snake:
         self.body.update()
         self.move_body()
 
+    def set_new_part_position(self, sprite:Sprite):
+        """Method used to position a body part using the last item of the body SpriteList
+        
+        Args:
+            sprite (Sprite): The sprite to position.
+            
+        Returns:
+            Sprite: The positioned sprite."""
+        
+        previous_part = self.body[-1]
+        sprite.center_x = previous_part.center_x + DIRECTIONS[self.direction][0]
+        sprite.center_y = previous_part.center_y + DIRECTIONS[self.direction][0]
+        sprite.angle = DIRECTIONS[self.direction][2]
+
+
+    def add_body(self):
+        """Method used to add a body part to the Snek"""
+
+        new_body_part = load_sprite(PLAYER_BODY)
+        self.set_new_part_position(new_body_part)
+        
+        self.tail.kill()
+        self.tail = load_sprite(PLAYER_TAIL)
+
+        self.body.append(new_body_part)
+
+        self.set_new_part_position(self.tail)
+        self.body.append(self.tail)
